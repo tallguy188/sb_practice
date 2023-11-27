@@ -1,13 +1,12 @@
 package com.ll.sb202311;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,8 +65,6 @@ public class HomeController {
         return "계산 결과 : %s".formatted(a + b);
     }
 
-
-
     @GetMapping("/calc7")
     @ResponseBody
     boolean showCalc7(
@@ -75,10 +72,7 @@ public class HomeController {
     ) {
         return a > b;
     }
-
-
     @GetMapping("/calc8")
-
     @ResponseBody
 
     Person showCalc8(          // return이 그대로 렌더링되는 것이 아니라 springboot가 자체해석해서 json값으로 렌더링해준다는 것을 배움
@@ -90,10 +84,6 @@ public class HomeController {
         return new Person(name, age);
 
     }
-
-
-
-
     @GetMapping("/calc9")
 
     @ResponseBody
@@ -103,13 +93,8 @@ public class HomeController {
             String name, int age
 
     ) {
-
         return new Person2(name, age);
-
     }
-
-
-
 
     @GetMapping("/calc10")
 
@@ -128,15 +113,9 @@ public class HomeController {
 
         );
 
-
-
-
         return personMap;
 
     }
-
-
-
 
     @GetMapping("/calc11")
 
@@ -153,14 +132,8 @@ public class HomeController {
 
         }};
 
-
-
-
         return nums;
-
     }
-
-
 
 
     @GetMapping("/calc12")
@@ -177,10 +150,6 @@ public class HomeController {
         return nums;
 
     }
-
-
-
-
     @GetMapping("/calc13")
 
     @ResponseBody
@@ -200,9 +169,6 @@ public class HomeController {
             add(new Person2(name + "!!", age + 2));
 
         }};
-
-
-
 
         return persons;
 
@@ -285,36 +251,28 @@ public class HomeController {
         return html;
     }
 
+    @GetMapping("/calc21")
+    String showCalc21(Model model) {
+        model.addAttribute("v1", "안녕");
+        model.addAttribute("v2", "반가워");
+        return "calc21";
+    }
+
 }
-
-
-
 
 @AllArgsConstructor
 
 class Person {
-
     public String name;
 
     public int age;
-
 }
-
-
-
 
 @AllArgsConstructor
 
 class Person2 {
-
     @Getter
-
     private String name;
-
     @Getter
-
     private int age;
-
 }
-
-
