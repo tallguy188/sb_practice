@@ -6,7 +6,15 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Article {
-    private long id;
+    private Long id;
     private String title;
     private String body;
+
+    public Article(String title, String body){
+        this.title = title;
+        this.body = body;
+    }
+
+
+
 }
