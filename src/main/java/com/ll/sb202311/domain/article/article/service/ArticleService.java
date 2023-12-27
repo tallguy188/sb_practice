@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArticleService {
     private final ArticleRepository articleRepository;
-    private final  List<Article> articles = new ArrayList<>();
+    private final List<Article> articles = new ArrayList<>();
 
 
     public Article write(String title, String body) {
