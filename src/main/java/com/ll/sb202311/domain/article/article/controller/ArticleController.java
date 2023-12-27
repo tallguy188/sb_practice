@@ -3,8 +3,6 @@ package com.ll.sb202311.domain.article.article.controller;
 import com.ll.sb202311.domain.article.article.entity.Article;
 import com.ll.sb202311.domain.article.article.service.ArticleService;
 import com.ll.sb202311.global.rsData.RsData.RsData;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +26,7 @@ public class ArticleController {
     @ResponseBody
     RsData doWrite(
             String title,
-            String body,
-            HttpServletRequest req,  // 요청에 맞는 객체가 들어옴
-            HttpServletResponse res
+            String body
     ) {
         Article article =  articleService.write(title,body);
 
