@@ -2,6 +2,7 @@ package com.ll.sb202311.domain.article.article.controller;
 
 import com.ll.sb202311.domain.article.article.entity.Article;
 import com.ll.sb202311.domain.article.article.service.ArticleService;
+import com.ll.sb202311.global.rq.Rq;
 import com.ll.sb202311.global.rsData.RsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final Rq rq;
 
     @GetMapping("/article/write")
     String showWrite() {
@@ -28,6 +30,20 @@ public class ArticleController {
             String title,
             String body
     ) {
+        if (title == null || title.trim().length() == 0) {
+            return new RsData<>(
+                    "F-1",
+                    "제목을 입력해주세요."
+            );
+        }
+
+        if (body == null || body.trim().length() == 0) {
+            return new RsData<>(
+                    "F-2",
+                    "내용을 입력해주세요."
+            );
+        }
+
         Article article =  articleService.write(title,body);
 
         RsData<Article> rs = new RsData<>(  // article버전 rsData
