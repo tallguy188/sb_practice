@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@ToString
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -72,11 +73,9 @@ public class ArticleController {
     }
 
     @GetMapping("/article/detail/{id}")
-    @ResponseBody
-    String showDetail(@PathVariable long id) {
-        Optional<Article> opArticle = articleService.findById(id);
-        Article article = opArticle.get(); // 값이 없으면 get()때문에 프로그램이 뻗음
-
+    String showDetail(Model model, @PathVariable long id) {
+        Article article = articleService.findById(id).get();
+        model.addAttribute("article", article);
         return "article/detail";
     }
 }
