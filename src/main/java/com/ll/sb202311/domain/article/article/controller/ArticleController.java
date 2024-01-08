@@ -5,10 +5,7 @@ import com.ll.sb202311.domain.article.article.service.ArticleService;
 import com.ll.sb202311.global.rq.Rq;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,6 +81,21 @@ public class ArticleController {
         articleService.delete(id);
 
         return "redirect:/article/list" ;
+    }
+    @Getter
+    @Setter
+    public static class ModifyForm {
+        @NotBlank
+        private String title;
+        @NotBlank
+        private String body;
+    }
+
+    @PostMapping("/article/modify/{id}")
+    String write(@PathVariable long id, @Valid ModifyForm modifyForm) {
+        articleService.modify(id, modifyForm.title, modifyForm.body);
+
+        return "redirect:/article/list";
     }
 }
 
