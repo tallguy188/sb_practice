@@ -36,6 +36,9 @@ public class ArticleService {
                 .filter(article -> article.getId() == id)
                 .findFirst();
     }
+    public void delete(long id) {
+        articleRepository.deleteById(id);
+    }
 
 
 }

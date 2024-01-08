@@ -78,5 +78,12 @@ public class ArticleController {
         model.addAttribute("article", article);
         return "article/detail";
     }
+
+    @GetMapping("/article/delete/{id}")
+    String delete(@PathVariable long id) {
+        articleService.delete(id);
+
+        return "redirect:/article/list" ;
+    }
 }
 
