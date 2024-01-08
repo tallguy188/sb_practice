@@ -38,12 +38,13 @@ public class ArticleController {
         private String body;
 
     }
+
     @PostMapping("/article/write")
     @ResponseBody
     RsData doWrite(@Valid WriteForm writeForm
     ) {
 
-        Article article =  articleService.write(writeForm.title,writeForm.body);
+        Article article = articleService.write(writeForm.title, writeForm.body);
 
         RsData<Article> rs = new RsData<>(  // article버전 rsData
                 "S-1",
@@ -64,6 +65,13 @@ public class ArticleController {
     @ResponseBody
     List<Article> getArticles() {
         return articleService.findAll();
+    }
+
+    @GetMapping("/article/list")
+    String showList(
+    ) {
+
+        return "article/list";
     }
 }
 
