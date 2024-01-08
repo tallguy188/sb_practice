@@ -14,4 +14,6 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     public Article findLastArticle();
     public List<Article> findAll();
 
+
+
 }

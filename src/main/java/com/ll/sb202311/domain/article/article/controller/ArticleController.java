@@ -3,7 +3,6 @@ package com.ll.sb202311.domain.article.article.controller;
 import com.ll.sb202311.domain.article.article.entity.Article;
 import com.ll.sb202311.domain.article.article.service.ArticleService;
 import com.ll.sb202311.global.rq.Rq;
-import com.ll.sb202311.global.rsData.RsData.RsData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -12,10 +11,12 @@ import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,19 +42,12 @@ public class ArticleController {
     }
 
     @PostMapping("/article/write")
-    @ResponseBody
-    RsData doWrite(@Valid WriteForm writeForm
+
+    String doWrite(@Valid WriteForm writeForm
     ) {
 
         Article article = articleService.write(writeForm.title, writeForm.body);
-
-        RsData<Article> rs = new RsData<>(  // article버전 rsData
-                "S-1",
-                "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
-                article
-        );
-
-        return rs;
+        return "redirect:/article/list";
     }
 
     @GetMapping("/article/getLastArticle")
@@ -77,5 +71,13 @@ public class ArticleController {
         return "article/list";
     }
 
+    @GetMapping("/article/detail/{id}")
+    @ResponseBody
+    String showDetail(@PathVariable long id) {
+        Optional<Article> opArticle = articleService.findById(id);
+        Article article = opArticle.get(); // 값이 없으면 get()때문에 프로그램이 뻗음
+
+        return "article/detail";
+    }
 }
 
