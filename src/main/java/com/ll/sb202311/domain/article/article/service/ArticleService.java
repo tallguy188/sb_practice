@@ -13,6 +13,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
+
+
     private final ArticleRepository articleRepository;
     private final List<Article> articles = new ArrayList<>();
 
@@ -23,9 +25,6 @@ public class ArticleService {
         return article;
     }
 
-    public Article findLastArticle() {
-        return articleRepository.findLastArticle();
-    }
 
     public List<Article> findAll() {
         return articleRepository.findAll();
