@@ -27,7 +27,7 @@ public class ArticleController {
 
     @GetMapping("/article/write")
     String showWrite() {
-        return "article/write";
+        return "/article/write";
     }
 
 
@@ -42,7 +42,6 @@ public class ArticleController {
     }
 
     @PostMapping("/article/write")
-
     String doWrite(@Valid WriteForm writeForm
     ) {
 
@@ -57,20 +56,19 @@ public class ArticleController {
 
         model.addAttribute("articles", articles);
 
-        return "article/list";
+        return "article/article/list";
     }
 
     @GetMapping("/article/detail/{id}")
     String showDetail(Model model, @PathVariable long id) {
         Article article = articleService.findById(id).get();
         model.addAttribute("article", article);
-        return "article/detail";
+        return "article/article/detail";
     }
 
     @GetMapping("/article/delete/{id}")
     String delete(@PathVariable long id) {
         articleService.delete(id);
-
 
         return rq.redirect("/article/list","%d번 게시물이 삭제되었습니다.".formatted(id));
     }
@@ -87,9 +85,6 @@ public class ArticleController {
     String modify(@PathVariable long id, @Valid ModifyForm modifyForm) {
         articleService.modify(id, modifyForm.title, modifyForm.body);
 
-
-
         return rq.redirect("/article/list","%d번 게시물이 수정되었습니다.".formatted(id));
     }
 }
-
