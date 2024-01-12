@@ -49,3 +49,22 @@ function toastNotice(msg) {
     toastr["success"](msg, "성공");
 
 }
+
+function getQueryParams() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const paramsObj = {};
+
+
+
+
+    for (const [key, value] of params) {
+
+        paramsObj[key] = value;
+
+    }
+
+    return paramsObj;
+
+}
